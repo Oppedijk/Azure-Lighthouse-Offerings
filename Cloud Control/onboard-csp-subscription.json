@@ -7,21 +7,21 @@
    "metadata": {
     "description": "Specify a unique name for your offer"
    },
-   "defaultValue": "Xpirit Cloud Control"
+   "defaultValue": "bla"
   },
   "mspOfferDescription": {
    "type": "string",
    "metadata": {
     "description": "Name of the Managed Service Provider offering"
    },
-   "defaultValue": "Xpirit Cloud Control is a free of charge service where Xpirit provides control of the cloud through Cost Management, monthly suggested improvements, Security and Compliance guardrails through policies and technical assistance through as a Cloud Solution Provider!"
+   "defaultValue": "bla"
   },
   "managedByTenantId": {
    "type": "string",
    "metadata": {
     "description": "Specify the tenant id of the Managed Service Provider"
    },
-   "defaultValue": "7c610feb-cf42-415e-8505-b64523147f9f"
+   "defaultValue": "3d4d17ea-1ae4-4705-947e-51369c5a5f79"
   },
   "authorizations": {
    "type": "array",
@@ -30,19 +30,42 @@
    },
    "defaultValue": [
     {
-     "principalId": "d37e57c6-7ed2-45ee-b7d8-c653b26698e0",
+     "principalId": "d91fa89a-3d26-4ef3-912b-0f2e7c2bf0ff",
      "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
-     "principalIdDisplayName": "Managed Cloud Control"
+     "principalIdDisplayName": "Erik Oppedijk | Admin"
+    }
+   ]
+  },
+  "eligibleAuthorizations": {
+   "type": "array",
+   "metadata": {
+    "description": "Provide the auhtorizations that will have just-in-time role assignments on customer environments with support for approvals from the managing tenant"
+   },
+   "defaultValue": [
+    {
+     "justInTimeAccessPolicy": {
+      "multiFactorAuthProvider": "Azure",
+      "maximumActivationDuration": "PT4H",
+      "managedByTenantApprovers": []
+     },
+     "principalId": "d91fa89a-3d26-4ef3-912b-0f2e7c2bf0ff",
+     "principalIdDisplayName": "Erik Oppedijk | Admin",
+     "roleDefinitionId": "fb1c8493-542b-48eb-b624-b4c8fea62acd"
     },
     {
-     "principalId": "d37e57c6-7ed2-45ee-b7d8-c653b26698e0",
-     "roleDefinitionId": "cfd33db0-3dd1-45e3-aa9d-cdbdf3b6f24e",
-     "principalIdDisplayName": "Managed Cloud Control"
-    },
-    {
-     "principalId": "d37e57c6-7ed2-45ee-b7d8-c653b26698e0",
-     "roleDefinitionId": "fa23ad8b-c56e-40d8-ac0c-ce449e1d2c64",
-     "principalIdDisplayName": "Managed Cloud Control"
+     "justInTimeAccessPolicy": {
+      "multiFactorAuthProvider": "Azure",
+      "maximumActivationDuration": "PT30M",
+      "managedByTenantApprovers": [
+       {
+        "principalId": "5c438bac-6979-442e-bb39-795e127b6961",
+        "principalIdDisplayName": "Xpirit BV"
+       }
+      ]
+     },
+     "principalId": "d91fa89a-3d26-4ef3-912b-0f2e7c2bf0ff",
+     "principalIdDisplayName": "Erik Oppedijk | Admin",
+     "roleDefinitionId": "7f951dda-4ed3-4680-a7ca-43fe172d538d"
     }
    ]
   }
@@ -60,7 +83,8 @@
     "registrationDefinitionName": "[parameters('mspOfferName')]",
     "description": "[parameters('mspOfferDescription')]",
     "managedByTenantId": "[parameters('managedByTenantId')]",
-    "authorizations": "[parameters('authorizations')]"
+    "authorizations": "[parameters('authorizations')]",
+    "eligibleAuthorizations": "[parameters('eligibleAuthorizations')]"
    }
   },
   {
@@ -83,6 +107,10 @@
   "authorizations": {
    "type": "array",
    "value": "[parameters('authorizations')]"
+  },
+  "eligibleAuthorizations": {
+   "type": "array",
+   "value": "[parameters('eligibleAuthorizations')]"
   }
  }
 }
